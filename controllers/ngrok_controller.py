@@ -13,7 +13,6 @@ class NgrokController:
         self._config_path = config_path
         self._tunnels = None
         self._ngrok_url = None
-        self._ngrok_config = None
 
     def close_latest_connection(self):
         try:
@@ -27,10 +26,10 @@ class NgrokController:
 
 
     def activate_config_path(self):
-        self._ngrok_config = self._config.PyngrokConfig(config_path=self._config_path)
+        self._config.PyngrokConfig(config_path=self._config_path)
 
     def establish_connection(self, port='80'):
-        self._model.connect(port=port, name='HiddenEye Connection', pyngrok_config=self._ngrok_config)
+        self._model.connect(port=port, name='HiddenEye Connection', pyngrok_config=self._config_path)
 
     def obtain_tunnels(self):
         self._tunnels = self._model.get_tunnels()
